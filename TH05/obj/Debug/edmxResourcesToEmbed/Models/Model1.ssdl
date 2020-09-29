@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLTruongHocModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="CourseId" />
+    </Key>
+    <Property Name="CourseId" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="CourseName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Location" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TeacherId" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Standard">
+    <Key>
+      <PropertyRef Name="StandardId" />
+    </Key>
+    <Property Name="StandardId" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="StandardName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Mota" Type="nvarchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="StandardId" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentAddress">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Address1" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Address2" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="State" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="TeacherId" />
+    </Key>
+    <Property Name="TeacherId" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="TeacherName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="StandardId" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <Association Name="FR_standard_student">
+    <End Role="Standard" Type="Self.Standard" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Standard">
+        <PropertyRef Name="StandardId" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="StandardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FR_standard_teacher">
+    <End Role="Standard" Type="Self.Standard" Multiplicity="1" />
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Standard">
+        <PropertyRef Name="StandardId" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="StandardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FR_student_studentaddress">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentAddress" Type="Self.StudentAddress" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="StudentAddress">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FR_teacher_course">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeacherId" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLTruongHocModelStoreContainer">
+    <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Standard" EntityType="Self.Standard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentAddress" EntityType="Self.StudentAddress" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FR_standard_student" Association="Self.FR_standard_student">
+      <End Role="Standard" EntitySet="Standard" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FR_standard_teacher" Association="Self.FR_standard_teacher">
+      <End Role="Standard" EntitySet="Standard" />
+      <End Role="Teacher" EntitySet="Teacher" />
+    </AssociationSet>
+    <AssociationSet Name="FR_student_studentaddress" Association="Self.FR_student_studentaddress">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="StudentAddress" EntitySet="StudentAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FR_teacher_course" Association="Self.FR_teacher_course">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="Course" EntitySet="Course" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

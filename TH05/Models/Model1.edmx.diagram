@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ba6f9e01459044dbb01c8f2fcf21e65f" Name="Diagram1">
+        <EntityTypeShape EntityType="QLTruongHocModel.Course" Width="1.5" PointX="3.625" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLTruongHocModel.Standard" Width="1.5" PointX="1.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLTruongHocModel.Student" Width="1.5" PointX="3.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLTruongHocModel.StudentAddress" Width="1.5" PointX="6.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLTruongHocModel.Teacher" Width="1.5" PointX="1.25" PointY="3.125" IsExpanded="true" />
+        <AssociationConnector Association="QLTruongHocModel.FR_teacher_course" ManuallyRouted="false" />
+        <AssociationConnector Association="QLTruongHocModel.FR_standard_student" ManuallyRouted="false" />
+        <AssociationConnector Association="QLTruongHocModel.FR_standard_teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="QLTruongHocModel.FR_student_studentaddress" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
